@@ -1,4 +1,5 @@
 package com.example.giuaki_mobile;
+//19110242-Lê Bá Minh
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,6 +19,7 @@ import com.example.giuaki_mobile.api.RetrofitClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+//19110242-Lê Bá Minh
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -31,6 +33,10 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // KIỂM TRA TRẠNG THÁI ĐĂNG NHẬP KHI VÀO ACTIVITY
+        checkLoginStatus();
+
         setContentView(R.layout.activity_login);
 
         authService = RetrofitClient.getAuthService();
@@ -57,6 +63,26 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+
+    /**
+     * Kiểm tra SharedPreferences để xem người dùng đã đăng nhập chưa.
+     * Nếu đã đăng nhập, chuyển hướng đến MainActivity và kết thúc LoginActivity.
+     */
+    private void checkLoginStatus() {
+        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        boolean isLoggedIn = prefs.getBoolean(KEY_IS_LOGGED_IN, false);
+        String token = prefs.getString(KEY_AUTH_TOKEN, null);
+
+        // Kiểm tra cả cờ isLoggedIn VÀ token phải tồn tại
+        if (isLoggedIn && token != null && !token.isEmpty()) {
+            // Chuyển hướng thẳng đến trang chủ
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            finish(); // Kết thúc LoginActivity để người dùng không quay lại được
+            return;
+        }
+        // Nếu chưa đăng nhập, tiếp tục thực thi onCreate()
+    }
+
     private void handleLogin() {
         String username = etUsername.getText().toString().trim();
         String password = etPassword.getText().toString().trim();
@@ -66,7 +92,6 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        // SỬA LỖI CONSTRUCTOR: Dùng constructor mặc định và Setters
         AuthRequest loginRequest = new AuthRequest();
         loginRequest.setUsername(username);
         loginRequest.setPassword(password);
@@ -88,9 +113,7 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     finish();
                 } else {
-                    // Xử lý lỗi từ server (sai user/pass, chưa active, ...)
                     String errorMsg = "Đăng nhập thất bại. Vui lòng kiểm tra lại thông tin hoặc tài khoản chưa kích hoạt.";
-                    // Có thể thêm logic parse response.errorBody() để lấy thông báo lỗi cụ thể
                     Toast.makeText(LoginActivity.this, errorMsg, Toast.LENGTH_LONG).show();
                 }
             }

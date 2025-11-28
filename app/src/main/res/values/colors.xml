@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Primary Material Colors -->
     <color name="purple_200">#FFBB86FC</color>
-    <!-- Màu tím chính, được dùng nhiều trong các activity -->
+    <!--    19110242-Lê Bá Minh-->
+    <!--    19110167-Lê Trần Gia Bảo-->
     <color name="purple_500">#FF6200EE</color>
-    <!-- Màu tím đậm hơn, thường là màu thanh trạng thái (status bar) -->
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-
-    <!-- Màu phụ trợ cho OtpEditText -->
+    <color name="purple_100">#EAE1F6</color>
     <color name="red">#E53935</color>
     <color name="grey_light">#F5F5F5</color>
     <color name="grey_medium">#9E9E9E</color>

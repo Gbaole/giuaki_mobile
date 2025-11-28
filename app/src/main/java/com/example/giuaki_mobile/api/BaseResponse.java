@@ -1,5 +1,6 @@
 package com.example.giuaki_mobile.api;
-
+//19110242-Lê Bá Minh
+//19110167-Lê Trần Gia Bảo
 public class BaseResponse<T> {
     private boolean success;
     private T data;

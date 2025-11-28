@@ -7,6 +7,7 @@
     android:layout_margin="8dp"
     app:cardCornerRadius="12dp"
     app:cardElevation="4dp">
+    <!--    19110167-Lê Trần Gia Bảo-->
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

@@ -1,5 +1,5 @@
 package com.example.giuaki_mobile.api;
-
+//19110242-Lê Bá Minh
 public class LoginResponse {
     private boolean success;
     private LoginData data;

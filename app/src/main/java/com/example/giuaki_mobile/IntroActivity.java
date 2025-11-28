@@ -19,12 +19,10 @@ public class IntroActivity extends AppCompatActivity {
 
         Button startButton = findViewById(R.id.btn_start);
 
-        // 🟢 ĐÃ SỬA: Loại bỏ logic kiểm tra đăng nhập.
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                // Luôn chuyển thẳng đến LoginActivity
                 startActivity(new Intent(IntroActivity.this, LoginActivity.class));
 
                 finish(); // Đóng IntroActivity

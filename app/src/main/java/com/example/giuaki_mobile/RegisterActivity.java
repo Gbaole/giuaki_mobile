@@ -27,10 +27,10 @@ public class RegisterActivity extends AppCompatActivity {
 
     // Fields cho Register
     private TextInputEditText etRegisterUsername, etRegisterEmail, etRegisterPassword;
-    // Fields cho Verify (Giả định 6 ô OTP được gom lại thành 1 trường chính)
+    // Fields cho Verify
     private TextInputEditText etOtp;
 
-    private String currentUsername; // Lưu username để dùng cho bước Verify
+    private String currentUsername;
 
     private AuthService authService;
 
@@ -40,6 +40,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         authService = RetrofitClient.getAuthService();
+        //19110242-Lê Bá Minh
 
         registerFormLayout = findViewById(R.id.layout_register_form);
         otpVerifyLayout = findViewById(R.id.layout_otp_verify);
@@ -54,11 +55,11 @@ public class RegisterActivity extends AppCompatActivity {
         // Ánh xạ EditText cho OTP
         etOtp = findViewById(R.id.et_otp_input);
 
-        // Mặc định hiển thị form đăng ký
+        //hiển thị form đăng ký
         registerFormLayout.setVisibility(View.VISIBLE);
         otpVerifyLayout.setVisibility(View.GONE);
 
-        // Xử lý khi click Đăng ký: gọi API Register
+        // gọi API Register
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,7 +67,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        // Xử lý khi click Xác thực OTP: gọi API Verify OTP
+        // gọi API Verify OTP
         verifyOtpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,7 +87,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         currentUsername = username;
-        // Constructor Register (3 tham số) vẫn hoạt động bình thường
+        // Constructor Register
         AuthRequest registerRequest = new AuthRequest(username, email, password);
 
         authService.register(registerRequest).enqueue(new Callback<BaseResponse<Object>>() {
@@ -99,7 +100,7 @@ public class RegisterActivity extends AppCompatActivity {
                     otpVerifyLayout.setVisibility(View.VISIBLE);
                 } else {
                     String errorMsg = "Đăng ký thất bại.";
-                    // Thêm logic parse lỗi từ errorBody nếu cần
+
                     Toast.makeText(RegisterActivity.this, errorMsg, Toast.LENGTH_LONG).show();
                 }
             }
@@ -119,7 +120,6 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
-        // SỬA LỖI CONSTRUCTOR: Dùng constructor mặc định và Setters cho Verify OTP
         AuthRequest verifyRequest = new AuthRequest();
         verifyRequest.setUsername(currentUsername);
         verifyRequest.setOtp(otp);

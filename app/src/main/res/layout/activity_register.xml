@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:padding="24dp"
     tools:context=".RegisterActivity">
+<!--    19110242-Lê Bá Minh-->
 
     <TextView
         android:id="@+id/tv_register_title"
